@@ -1,0 +1,14 @@
+.vscode
+.env
+.venv
+settings.env
+__pycache__
+inputs/
+
+# === Node / React ===
+node_modules/
+dist/
+build/
+.cache/
+.tmp/
+coverage/

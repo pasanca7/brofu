@@ -1,0 +1,43 @@
+{
+    "players": [
+      { "id": 1, "name": "Andrés Palop", "position": "GK", "country": "ES" },
+      { "id": 2, "name": "Antonio Notario", "position": "GK", "country": "ES" },
+      { "id": 3, "name": "Javi Varas", "position": "GK", "country": "ES" },
+      { "id": 4, "name": "Pablo Vargas", "position": "GK", "country": "ES" },
+      
+      { "id": 5, "name": "Dani Alves", "position": "DF", "country": "BR" },
+      { "id": 6, "name": "Javi Navarro", "position": "DF", "country": "ES" },
+      { "id": 7, "name": "David Castedo", "position": "DF", "country": "ES" },
+      { "id": 8, "name": "Julien Escudé", "position": "DF", "country": "FR" },
+      { "id": 9, "name": "Ivica Dragutinović", "position": "DF", "country": "RS" },
+      { "id": 10, "name": "Aitor Ocio", "position": "DF", "country": "ES" },
+      { "id": 11, "name": "Adriano Correia", "position": "DF", "country": "BR" },
+      { "id": 12, "name": "Jesús Navas", "position": "DF", "country": "ES" },
+      { "id": 13, "name": "Pablo Ruiz", "position": "DF", "country": "ES" },
+      { "id": 14, "name": "David Prieto", "position": "DF", "country": "ES" },
+      { "id": 15, "name": "José Ángel Crespo", "position": "DF", "country": "ES" },
+      { "id": 16, "name": "Manuel Blanco", "position": "DF", "country": "ES" },
+      { "id": 17, "name": "Sergio Ramos", "position": "DF", "country": "ES" },
+      { "id": 18, "name": "Pablo Alfaro", "position": "DF", "country": "ES" },
+  
+      { "id": 19, "name": "Antonio López", "position": "MF", "country": "ES" },
+      { "id": 20, "name": "Renato", "position": "MF", "country": "BR" },
+      { "id": 21, "name": "Diego Capel", "position": "MF", "country": "ES" },
+      { "id": 22, "name": "Enzo Maresca", "position": "MF", "country": "IT" },
+      { "id": 23, "name": "Francisco Gallardo", "position": "MF", "country": "ES" },
+      { "id": 24, "name": "Bruno Herrero", "position": "MF", "country": "ES" },
+      { "id": 25, "name": "Jesuli", "position": "MF", "country": "ES" },
+      { "id": 26, "name": "Alejandro Alfaro", "position": "MF", "country": "ES" },
+      { "id": 27, "name": "José Luis Martí", "position": "MF", "country": "ES" },
+      { "id": 28, "name": "Antonio Puerta", "position": "MF", "country": "ES" },
+      { "id": 29, "name": "Fernando Sales", "position": "MF", "country": "ES" },
+      { "id": 30, "name": "Jordi López", "position": "MF", "country": "ES" },
+  
+      { "id": 31, "name": "Luís Fabiano", "position": "FW", "country": "BR" },
+      { "id": 32, "name": "Ariza Makukula", "position": "FW", "country": "CD" },
+      { "id": 33, "name": "Frédéric Kanouté", "position": "FW", "country": "ML" },
+      { "id": 34, "name": "Kepa Blanco", "position": "FW", "country": "ES" },
+      { "id": 35, "name": "Javier Saviola", "position": "FW", "country": "AR" }
+    ]
+  }
+  
