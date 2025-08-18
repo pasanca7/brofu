@@ -21,6 +21,7 @@ async def populate_db(db) -> None:
 
 async def load_levels(db):
     await load_sevilla_2007(db)
+    await load_barca_2011(db)
 
 
 async def load_sevilla_2007(db):
@@ -167,17 +168,30 @@ async def load_sevilla_2007(db):
     logger.info("Sevilla F.C. 2006-2007 level added successfully")
 
 
-async def init_db() -> None:
-    """
-    logger.info("Dropping and creating tables...")
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
-        await conn.run_sync(Base.metadata.create_all)
-    logger.info("Tables created successfully")
-    """
+async def load_barca_2011(db):
+    level = Level(
+        team="F.C. Barcelona",
+        season="2010-2011",
+        logo_url="https://img.uefa.com/imgml/TP/teams/logos/100x100/50080.png",
+    )
 
+    db.add(level)
+    await db.commit()
+    await db.refresh(level)
+    logger.info("F.C. Barcelona 2010-2011 level added successfully")
+
+
+async def init_db() -> None:
     async with AsyncSessionLocal() as session:
+        for table in reversed(Base.metadata.sorted_tables):
+            await session.execute(
+                text(f"TRUNCATE {table.name} RESTART IDENTITY CASCADE;")
+            )
+        await session.commit()
+        logger.info("Tables truncated successfully")
+
         await populate_db(session)
+        logger.info("Data populated successfully")
 
 
 if __name__ == "__main__":
