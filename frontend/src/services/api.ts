@@ -9,7 +9,7 @@ const api = axios.create({
 
 export const getLevels = async () => {
   const response = await api.get("/game/levels");
-  return response.data;
+  return response;
 };
 
 export default api;

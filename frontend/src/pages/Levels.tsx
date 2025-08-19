@@ -1,13 +1,22 @@
 import Header from "../components/Header";
-import { useEffect } from "react";
-import api from "../services/api";
+import { useEffect, useState } from "react";
+import { getLevels } from "../services/api";
+import type { BasicLevel } from "../types/Game";
+import LevelCard from "../components/LevelCard";
 
 const Levels: React.FC = () => {
+  const [levels, setLevels] = useState<BasicLevel[]>([]);
+
   useEffect(() => {
-    api.get("/game/levels").then((response) => {
-      console.log(response.data);
-    });
-  });
+    getLevels()
+      .then((response) => {
+        console.log(response);
+        setLevels(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <div className="h-full w-full bg-slate-800 text-white">
       <Header />
@@ -18,10 +27,13 @@ const Levels: React.FC = () => {
           </p>
         </div>
       </div>
-      <div>
-        <h2>Levels</h2>
-        <p>This is the Levels page.</p>
-      </div>
+      <section>
+        {levels.map((level) => (
+          <div key={level.id}>
+            <LevelCard level={level} />
+          </div>
+        ))}
+      </section>
     </div>
   );
 };
