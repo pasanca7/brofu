@@ -4,7 +4,7 @@ import datetime
 from fastapi.testclient import TestClient
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import StaticPool, select
+from sqlalchemy import StaticPool
 
 from backend.main import app
 from backend.utils.database import Base
