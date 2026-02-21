@@ -7,8 +7,10 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import StaticPool
 
 from backend.main import app
-from backend.utils.database import Base
+from backend.utils.database import Base, get_db
+from backend.utils.auth import hash_password
 from backend.models.Player import Player
+from backend.models.User import User
 
 DATABASE_URL = "sqlite+aiosqlite:///:memory:"
 
@@ -27,15 +29,36 @@ TestingSessionLocal = sessionmaker(
 )
 
 
+def override_get_db():
+    db = TestingSessionLocal()
+    yield db
+    db.close()
+
+
+app.dependency_overrides[get_db] = override_get_db
+
+
 @pytest.fixture(scope="session")
 def client():
     return TestClient(app)
 
 
 @pytest_asyncio.fixture(scope="function")
-async def setup_db():
+async def setup_db(client, test_user):
     async with engine.begin() as conn:
+        global TOKEN_USER
         await conn.run_sync(Base.metadata.create_all)
+        async with TestingSessionLocal() as session:
+            user = test_user
+            session.add(user)
+            await session.commit()
+        TOKEN_USER = client.post(
+            "/login",
+            data={
+                "username": "pasanca_7",
+                "password": "securepassword",
+            },
+        ).json()["access_token"]
     yield
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
@@ -46,6 +69,17 @@ async def db(setup_db):
     async with TestingSessionLocal() as session:
         yield session
         await session.rollback()
+
+
+@pytest.fixture
+def test_user():
+    return User(
+        username="pasanca_7",
+        email="pasanca_7@example.com",
+        first_name="Pablo",
+        second_name="de los Santos Carrión",
+        hashed_password=hash_password("securepassword"),
+    )
 
 
 @pytest.fixture

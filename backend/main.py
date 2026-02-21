@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.routers.players_router import router as players_router
 from backend.routers.game_router import router as game_router
+from backend.routers.auth import router as auth_router
 from backend.settings import ORIGINS
 
 app = FastAPI(
@@ -15,6 +16,7 @@ api_router = APIRouter(prefix="/api")
 
 app.include_router(players_router)
 app.include_router(game_router)
+app.include_router(auth_router)
 
 # TODO: check allow methods and headers
 app.add_middleware(

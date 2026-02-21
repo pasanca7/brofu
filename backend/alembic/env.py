@@ -12,6 +12,9 @@ from alembic import context
 from sqlalchemy import create_engine
 
 from backend.utils.database import Base, DATABASE_URL_SYNC
+from backend.models.User import User, UserRole
+from backend.models.Game import Level
+from backend.models.Player import Player
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

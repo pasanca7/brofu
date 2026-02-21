@@ -3,20 +3,36 @@ import datetime
 from sqlalchemy.future import select
 from sqlalchemy import text
 
+from backend.models.User import User
 from backend.models.Player import Player
 from backend.models.Game import Level
 from backend.utils.logger import logger
+from backend.utils.auth import hash_password
 from backend.ETL.players import pipeline
 from backend.utils.database import Base, engine, AsyncSessionLocal
 
 
 async def populate_db(db) -> None:
+    logger.info("=========== Populating Users ===========")
+    await load_user(db)
     logger.info("=========== Populating Players ===========")
     pipeline(path_file="backend/inputs/transfermarkt_players.csv")
     await db.execute(text("ALTER SEQUENCE players_id_seq RESTART WITH 1391240"))
     await db.commit()
     logger.info("=========== Populating levels ===========")
     await load_levels(db)
+
+
+async def load_user(db):
+    user = User(
+        username="pasanca_7",
+        email="pasanca_7@example.com",
+        first_name="Pablo",
+        second_name="de los Santos Carrión",
+        hashed_password=hash_password("complex_password"),
+    )
+    db.add(user)
+    await db.commit()
 
 
 async def load_levels(db):

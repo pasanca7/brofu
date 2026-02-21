@@ -84,6 +84,18 @@ def upgrade() -> None:
             "level_id", "player_id", name=op.f("level_players_pkey")
         ),
     )
+    op.create_table(
+        "users",
+        sa.Column("id", sa.UUID(), nullable=False),
+        sa.Column("username", sa.String(length=15), nullable=False),
+        sa.Column("hashed_password", sa.String(), nullable=False),
+        sa.Column("email", sa.String(length=255), nullable=False),
+        sa.Column("first_name", sa.String(length=255), nullable=True),
+        sa.Column("second_name", sa.String(length=255), nullable=True),
+        sa.PrimaryKeyConstraint("id"),
+        sa.UniqueConstraint("email"),
+        sa.UniqueConstraint("username"),
+    )
     # ### end Alembic commands ###
 
 
@@ -93,4 +105,5 @@ def downgrade() -> None:
     op.drop_table("level_players")
     op.drop_table("levels")
     op.drop_table("players")
+    op.drop_table("users")
     # ### end Alembic commands ###
